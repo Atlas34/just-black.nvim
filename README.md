@@ -5,9 +5,12 @@ created based on [VSCode just-black theme](https://marketplace.visualstudio.com/
 ## Installation
 
 ```lua
-use "Atlas34/just-black.nvim"
-
-vim.cmd[[colorscheme just-black]] 
+use {
+	"Atlas34/just-black.nvim",
+ 	config = function()
+        require('just-black').setup()
+    end
+}
 ```
 
 ## Demo

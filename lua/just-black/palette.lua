@@ -27,6 +27,7 @@ local colors = {
   red = '#FF5370',
   redLight = '#FF3B3B',
   white = '#ffffff',
+  whiteSmoke = '#bbbbbb',
   yellow = '#FFFF00',
   yellowLight = '#FFFF7E',
 }

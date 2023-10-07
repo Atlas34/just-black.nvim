@@ -487,6 +487,14 @@ theme.set_highlights = function()
   -- Crates
   hl(0, "CratesNvimLoading", { fg = c.blue, bg = 'NONE' })
   hl(0, "CratesNvimVersion", { fg = c.blue, bg = 'NONE' })
+
+  -- Bookmark
+  hl(0, "BookMarksAdd", { fg = c.blue, bg = 'NONE' })
+  hl(0, "BookMarksAddNr", { fg = c.blue, bg = 'NONE' })
+  hl(0, "BookMarksAddLn", { fg = 'NONE', bg = c.darkBlue })
+  hl(0, "BookMarksAnn", { fg = c.greenPastel, bg = 'NONE' })
+  hl(0, "BookMarksAnnNr", { fg = c.greenPastel, bg = 'NONE' })
+  hl(0, "BookMarksAnnLn", { fg = 'NONE', bg = c.darkGreenPastel })
 end
 
 return theme

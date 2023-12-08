@@ -6,9 +6,9 @@ created based on [VSCode just-black theme](https://marketplace.visualstudio.com/
 
 ```lua
 use {
-	"Atlas34/just-black.nvim",
- 	config = function()
-        require('just-black').setup()
+    "Atlas34/just-black.nvim",
+    config = function()
+        vim.cmd('colorscheme just-black')
     end
 }
 ```

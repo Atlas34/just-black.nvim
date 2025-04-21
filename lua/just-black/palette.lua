@@ -4,7 +4,7 @@ local colors = {
   black3 = "#10130b",
   black4 = "#1d1f28",
   black5 = "#232638",
-  darkBlue = "#041438",
+  darkBlue = "#07196e",
   blue = "#0077ff",
   blueLight = "#3bb6f7",
   cyan = "#00ffff",
@@ -33,6 +33,7 @@ local colors = {
   whiteSmoke = "#bbbbbb",
   yellow = "#FFFF00",
   yellowLight = "#FFFF7E",
+  none = 'NONE',
 }
 
 return colors;

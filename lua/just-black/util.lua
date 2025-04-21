@@ -34,6 +34,10 @@ function M.lighten(hex, amount, fg)
   return M.blend(hex, fg or M.fg, amount)
 end
 
+function M.blend_bg(hex, amount, bg)
+  return M.blend(hex, bg or M.bg, amount)
+end
+
 function M.invert_color(color)
   local hsluv = require("atlas.hsluv")
   if color ~= "NONE" then

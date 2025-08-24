@@ -23,7 +23,6 @@ function M.setup(variant)
       return
     end
   else
-    snacks.notifier.notify("Light Called")
     local status_ok
     status_ok, c = pcall(require, "just-black.colors.palette_light")
     if not status_ok then

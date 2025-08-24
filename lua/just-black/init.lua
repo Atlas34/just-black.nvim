@@ -19,7 +19,6 @@ M.setup = function(options)
   if config.Variant == "dark" then
     vim.o.background = "dark"
   else
-    vim.notify("JMF >>>> Color Light")
     vim.o.background = "light"
   end
 

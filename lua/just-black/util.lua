@@ -39,7 +39,7 @@ function M.blend_bg(hex, amount, bg)
 end
 
 function M.invert_color(color)
-  local hsluv = require("atlas.hsluv")
+  local hsluv = require("just-black.hsluv")
   if color ~= "NONE" then
     local hsl = hsluv.hex_to_hsluv(color)
     hsl[3] = 100 - hsl[3]

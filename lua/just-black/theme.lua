@@ -1,7 +1,11 @@
 local M = {}
 
 local util = require("just-black.util")
-local c = require("just-black.palette")
+local snacks = require("snacks")
+---@type Palette
+local c = require("just-black.colors.palette_dark")
+---@return Theme
+local Theme = {}
 
 function Set_Highlights(theme)
   for key, value in pairs(theme) do
@@ -9,8 +13,25 @@ function Set_Highlights(theme)
   end
 end
 
----@return Theme
-local Theme = {}
+--- @param variant string Either `"dark"` or `"light"`.
+function M.setup(variant)
+  if variant == "dark" then
+    local status_ok
+    status_ok, c = pcall(require, "just-black.colors.palette_dark")
+    if not status_ok then
+      snacks.notifier.notify("palette_dark in just-black plugin not found!", "warn")
+      return
+    end
+  else
+    snacks.notifier.notify("Light Called")
+    local status_ok
+    status_ok, c = pcall(require, "just-black.colors.palette_light")
+    if not status_ok then
+      snacks.notifier.notify("palette_light in just-black plugin not found!", "warn")
+      return
+    end
+  end
+end
 
 function M.set_highlights(transparent)
   ---@class Theme
@@ -23,7 +44,8 @@ function M.set_highlights(transparent)
   ---@field style string|nil|Highlight
   ---@field link string|nil
   ---@alias Highlights table<string,Highlight>
-  Theme.highlights = {
+
+  Theme = {
     Normal = { fg = c.fg, bg = c.bg },
     SignColumn = { fg = "NONE", bg = c.bg },
     MsgArea = { fg = c.fg, bg = c.bg },
@@ -31,11 +53,11 @@ function M.set_highlights(transparent)
     MsgSeparator = { fg = c.fg, bg = c.bg },
     SpellBad = { fg = "NONE", bg = "NONE", sp = c.red, undercurl = true },
     SpellCap = { fg = "NONE", bg = "NONE", sp = c.yellow, undercurl = true },
-    SpellLocal = { fg = "NONE", bg = "NONE", sp = c.yelloworange, underline = true },
+    SpellLocal = { fg = "NONE", bg = "NONE", sp = c.orange, underline = true },
     SpellRare = { fg = "NONE", bg = "NONE", sp = c.purple, underline = true },
     NormalNC = { fg = c.fg, bg = c.bg },
     Pmenu = { fg = c.grey1, bg = c.bg },
-    PmenuSel = { fg = "NONE", bg = c.black1 },
+    PmenuSel = { fg = "NONE", bg = c.accent1 },
     WildMenu = { fg = c.grey1, bg = c.bg },
     CursorLineNr = { fg = c.cyanLight, bg = "NONE", bold = true },
     Folded = { fg = c.grey1, bg = c.bg },
@@ -44,11 +66,11 @@ function M.set_highlights(transparent)
     FloatBoder = { fg = c.grey1, bg = c.bg },
     Whitespace = { fg = c.bg, bg = "NONE" },
     VertSplit = { fg = c.grey1, bg = c.bg },
-    CursorLine = { fg = "NONE", bg = c.black1 },
-    CursorColumn = { fg = "NONE", bg = c.black1 },
-    ColorColumn = { fg = "NONE", bg = c.black1 },
+    CursorLine = { fg = "NONE", bg = c.accent1 },
+    CursorColumn = { fg = "NONE", bg = c.accent1 },
+    ColorColumn = { fg = "NONE", bg = c.accent1 },
     NormalFloat = { fg = "NONE", bg = c.alt_bg },
-    Visual = { fg = c.whiteSmoke, bg = c.greenBlue },
+    Visual = { fg = "NONE", bg = c.lightGreenBlue },
     VisualNOS = { fg = "NONE", bg = c.alt_bg },
     WarningMsg = { fg = c.orange, bg = c.bg, bold = true },
 
@@ -65,15 +87,15 @@ function M.set_highlights(transparent)
     MatchParen = { fg = c.blueLight, bg = "NONE", underline = true },
     MatchWordCur = { fg = "NONE", bg = "NONE", underline = true },
     MatchParenCur = { fg = "NONE", bg = "NONE", underline = true },
-    Cursor = { fg = c.black1, bg = c.grey1 },
-    lCursor = { fg = c.black1, bg = c.grey1 },
-    CursorIM = { fg = c.black1, bg = c.grey1 },
-    TermCursor = { fg = c.black1, bg = c.grey1 },
-    TermCursorNC = { fg = c.black1, bg = c.grey1 },
+    Cursor = { fg = c.accent1, bg = c.grey1 },
+    lCursor = { fg = c.accent1, bg = c.grey1 },
+    CursorIM = { fg = c.accent1, bg = c.grey1 },
+    TermCursor = { fg = c.accent1, bg = c.grey1 },
+    TermCursorNC = { fg = c.accent1, bg = c.grey1 },
     Conceal = { fg = c.grey1, bg = "NONE" },
     Directory = { fg = c.blue, bg = "NONE" },
     SpecialKey = { fg = c.red, bg = "NONE", bold = true },
-    ErrorMsg = { fg = c.error, bg = c.bg, bold = true },
+    ErrorMsg = { fg = c.redError, bg = c.bg, bold = true },
     Search = { fg = c.white, bg = c.greenBlue },
     IncSearch = { fg = c.white, bg = c.greenBlue },
     Substitute = { fg = c.white, bg = c.greenBlue },
@@ -88,7 +110,7 @@ function M.set_highlights(transparent)
     -- Code
     Comment = { fg = c.grey1, bg = "NONE", italic = true },
     Variable = { fg = c.cyanLight, bg = "NONE" },
-    String = { fg = c.greenPastel, bg = "NONE" },
+    String = { fg = c.pink, bg = "NONE" },
     Character = { fg = c.orangeLight, bg = "NONE" },
     Number = { fg = c.yellow, bg = "NONE" },
     Float = { fg = c.yellow, bg = "NONE" },
@@ -107,7 +129,7 @@ function M.set_highlights(transparent)
     Structure = { fg = c.blue, bg = "NONE" },
     Typedef = { fg = c.orange, bg = "NONE" },
     Define = { fg = c.red, bg = "NONE" },
-    Macro = { fg = c.greenLight, bg = "NONE" },
+    cro = { fg = c.greenLight, bg = "NONE" },
     Debug = { fg = c.red, bg = "NONE" },
     Title = { fg = c.yellow, bg = "NONE", bold = true },
     Label = { fg = c.greenBlue, bg = "NONE" },
@@ -150,7 +172,7 @@ function M.set_highlights(transparent)
     TSFunction = { link = "Function" },
     TSFuncBuiltin = { link = "Function" },
     TSMethod = { link = "Function" },
-    TSFuncMacro = { link = "Function" },
+    TSFunccro = { link = "Function" },
     TSConditional = { link = "Conditional" },
     TSRepeat = { link = "Repeat" },
     TSOperator = { link = "Operator" },
@@ -178,7 +200,7 @@ function M.set_highlights(transparent)
     TSStringSpecial = { fg = c.fg, bg = "NONE" },
     TSEnvironmentName = { fg = c.cyan, bg = "NONE" },
     TSVariableBuiltin = { link = "Variable" },
-    TSConstMacro = { fg = c.orange, bg = "NONE" },
+    TSConstcro = { fg = c.orange, bg = "NONE" },
     TSTypeBuiltin = { fg = c.orange, bg = "NONE" },
     TSAnnotation = { fg = c.cyan, bg = "NONE" },
     TSNamespace = { fg = c.cyan, bg = "NONE" },
@@ -294,10 +316,10 @@ function M.set_highlights(transparent)
     DiagnosticUnderlineWarn = { fg = "NONE", bg = "NONE", sp = c.orange, undercurl = true },
     DiagnosticUnderlineError = { fg = "NONE", bg = "NONE", sp = c.red, undercurl = true },
     DiagnosticSignInformation = { link = "DiagnosticInfo" },
-    DiagnosticVirtualTextHint = { fg = c.blueLight, bg = util.darken(c.blueLight, 0.1) },
-    DiagnosticVirtualTextInfo = { fg = c.blue, bg = util.darken(c.blue, 0.1) },
-    DiagnosticVirtualTextWarn = { fg = c.orange, bg = util.darken(c.orange, 0.1) },
-    DiagnosticVirtualTextError = { fg = c.red, bg = util.darken(c.redError, 0.05) },
+    DiagnosticVirtualTextHint = { fg = c.blueLight, bg = "NONE" },
+    DiagnosticVirtualTextInfo = { fg = c.blue, bg = "NONE" },
+    DiagnosticVirtualTextWarn = { fg = c.orange, bg = "NONE" },
+    DiagnosticVirtualTextError = { fg = c.red, bg = "NONE" },
     LspDiagnosticsError = { fg = c.red, bg = "NONE" },
     LspDiagnosticsWarning = { fg = c.orange, bg = "NONE" },
     LspDiagnosticsInfo = { fg = c.blue, bg = "NONE" },
@@ -338,6 +360,7 @@ function M.set_highlights(transparent)
     LspReferenceWrite = { fg = "NONE", bg = c.alt_bg },
     LspCodeLens = { fg = c.fg, bg = "NONE", italic = true },
     LspCodeLensSeparator = { fg = c.fg, bg = "NONE", italic = true },
+    LspInlayHint = { fg = c.yellowLight, bg = "NONE", italic = true },
 
     -- Quickscope
     QuickScopePrimary = { fg = c.fuchsia, bg = "NONE", underline = true },
@@ -346,15 +369,15 @@ function M.set_highlights(transparent)
     -- Markdown
     mkdHeading = { fg = c.orange, bold = true },
     -- mkdCode = { bg = c.terminal_black, fg = c.fg },
-    mkdCodeDelimiter = { bg = c.black5, fg = c.fg },
+    mkdCodeDelimiter = { bg = c.accent3, fg = c.fg },
     mkdCodeStart = { fg = c.greenBlue, bold = true },
     mkdCodeEnd = { fg = c.greenBlue, bold = true },
-    ["@markup.raw.block"] = { bg = c.black5 },
+    ["@markup.raw.block"] = { bg = c.accent3 },
     -- mkdLink = { fg = c.blue, underline = true },
 
     markdownHeadingDelimiter = { fg = c.orange, bold = true },
     markdownCode = { fg = c.greenBlue },
-    markdownCodeBlock = { fg = c.teal },
+    markdownCodeBlock = { fg = c.greenPastel },
     markdownH1 = { fg = c.fuchsia, bold = true },
     markdownH2 = { fg = c.blue, bold = true },
     markdownLinkText = { fg = c.blue, underline = true },
@@ -384,7 +407,7 @@ function M.set_highlights(transparent)
     NvimTreeImageFile = { fg = c.grey4, bg = "NONE" },
     NvimTreeSpecialFile = { fg = c.orange, bg = "NONE" },
     NvimTreeEndOfBuffer = { fg = c.alt_bg, bg = "NONE" },
-    NvimTreeCursorLine = { fg = "NONE", bg = c.black1 },
+    NvimTreeCursorLine = { fg = "NONE", bg = c.accent1 },
     NvimTreeGitStaged = { fg = c.greenLight, bg = "NONE" },
     NvimTreeGitNew = { fg = c.greenLight, bg = "NONE" },
     NvimTreeGitRenamed = { fg = c.greenLight, bg = "NONE" },
@@ -423,11 +446,12 @@ function M.set_highlights(transparent)
     IndentBlanklineContextChar = { fg = c.grey4, bg = "NONE" },
     IndentBlanklineContextStart = { fg = "NONE", bg = "NONE", underline = true },
     IndentBlanklineChar = { fg = c.grey1, bg = "NONE" },
+    IndentBlanklineScopeChar = { fg = c.red, bg = "NONE" },
 
     -- Cmp
     CmpItemAbbrDeprecated = { fg = c.grey1, bg = "NONE", strikethrough = true },
-    CmpItemAbbrMatch = { fg = c.ui3_blue, bg = "NONE" },
-    CmpItemAbbrMatchFuzzy = { fg = c.ui3_blue, bg = "NONE" },
+    CmpItemAbbrMatch = { fg = c.blue, bg = "NONE" },
+    CmpItemAbbrMatchFuzzy = { fg = c.blue, bg = "NONE" },
     CmpItemKindFunction = { fg = c.cyan, bg = "NONE" },
     CmpItemKindMethod = { fg = c.cyan, bg = "NONE" },
     CmpItemKindConstructor = { fg = c.yellow, bg = "NONE" },
@@ -454,6 +478,23 @@ function M.set_highlights(transparent)
     CmpItemKindOperator = { fg = c.grey4, bg = "NONE" },
     CmpItemKindTypeParameter = { fg = c.greenBlue, bg = "NONE" },
 
+    -- Blink
+    BlinkCmpDoc = { fg = c.fg, bg = c.accent3 },
+    BlinkCmpDocBorder = { fg = c.greenLight, bg = c.accent3 },
+    BlinkCmpGhostText = { fg = c.grey2 },
+    BlinkCmpKindCodeium = { fg = c.greenPastel, bg = c.none },
+    BlinkCmpKindCopilot = { fg = c.greenPastel, bg = c.none },
+    BlinkCmpKindDefault = { fg = c.fg, bg = c.none },
+    BlinkCmpKindSupermaven = { fg = c.greenPastel, bg = c.none },
+    BlinkCmpKindTabNine = { fg = c.greenBlue, bg = c.none },
+    BlinkCmpLabel = { fg = c.fg, bg = c.none },
+    BlinkCmpLabelDeprecated = { fg = c.fg, bg = c.none, strikethrough = true },
+    BlinkCmpLabelMatch = { fg = c.blueLight, bg = c.none },
+    BlinkCmpMenu = { fg = c.fg, bg = c.accent3 },
+    BlinkCmpMenuBorder = { fg = c.greenLight, bg = c.accent3 },
+    BlinkCmpSignatureHelp = { fg = c.fg, bg = c.accent3 },
+    BlinkCmpSignatureHelpBorder = { fg = c.greenLight, bg = c.accent3 },
+
     -- Navic
     NavicIconsFile = { fg = c.grey2, bg = "NONE" },
     NavicIconsModule = { fg = c.yellow, bg = "NONE" },
@@ -469,7 +510,7 @@ function M.set_highlights(transparent)
     NavicIconsFunction = { fg = c.blue, bg = "NONE" },
     NavicIconsVariable = { fg = c.fuchsia, bg = "NONE" },
     NavicIconsConstant = { fg = c.fuchsia, bg = "NONE" },
-    NavicIconsString = { fg = c.greenBlue, bg = "NONE" },
+    NavicIconsString = { fg = c.pink, bg = "NONE" },
     NavicIconsNumber = { fg = c.orange, bg = "NONE" },
     NavicIconsBoolean = { fg = c.orange, bg = "NONE" },
     NavicIconsArray = { fg = c.orange, bg = "NONE" },
@@ -486,7 +527,7 @@ function M.set_highlights(transparent)
     NavicSeparator = { fg = c.grey4, bg = "NONE" },
 
     -- Packer
-    packerString = { fg = c.orange, bg = "NONE" },
+    packerString = { fg = c.pink, bg = "NONE" },
     packerHash = { fg = c.blue, bg = "NONE" },
     packerOutput = { fg = c.purple, bg = "NONE" },
     packerRelDate = { fg = c.grey1, bg = "NONE" },
@@ -567,10 +608,10 @@ function M.set_highlights(transparent)
     SnacksProfilerBadgeInfo = { bg = util.blend_bg(c.blueLight, 0.1), fg = c.blueLight },
     SnacksScratchKey = { bg = util.blend_bg(c.blueLight, 0.3), fg = c.blueLight },
     SnacksScratchDesc = { bg = util.blend_bg(c.blueLight, 0.1), fg = c.blueLight },
-    SnacksProfilerIconTrace = { bg = util.blend_bg(c.darkBlue, 0.3), fg = c.black3 },
-    SnacksProfilerBadgeTrace = { bg = util.blend_bg(c.darkBlue, 0.1), fg = c.black3 },
+    SnacksProfilerIconTrace = { bg = util.blend_bg(c.darkBlue, 0.3), fg = c.accent2 },
+    SnacksProfilerBadgeTrace = { bg = util.blend_bg(c.darkBlue, 0.1), fg = c.accent2 },
     SnacksIndent = { fg = c.grey1, nocombine = true },
-    SnacksIndentScope = { fg = c.blueLight, nocombine = true },
+    SnacksIndentScope = { fg = c.greenPastel, nocombine = true },
     SnacksZenIcon = { fg = c.purple },
     SnacksInputIcon = { fg = c.blueLight },
     SnacksInputBorder = { fg = c.yellow },
@@ -585,7 +626,7 @@ function M.set_highlights(transparent)
     SnacksPickerPickWin = { fg = c.fg, bg = c.grey4, bold = true },
     SnacksPickerDir = { fg = c.grey1 },
   }
-  Set_Highlights(Theme.highlights)
+  Set_Highlights(Theme)
 end
 
 return M

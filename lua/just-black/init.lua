@@ -1,27 +1,41 @@
 local M = {}
 
-vim.cmd('hi clear')
-if vim.fn.exists('syntax_on') then
-  vim.cmd('syntax reset')
-end
+--- @param options {Variant?: string, Transparent?: boolean}|nil
+M.setup = function(options)
+  local theme = require("just-black.theme")
+  options = options or {}
+  ---@type {Variant?: string, Transparent?: boolean}
+  local config = {
+    Transparent = false,
+    Variant = "dark",
+  }
 
----@type {Black?: string, Transparent?: string}
-M.styles = {}
+  config = vim.tbl_deep_extend("force", config, options) -- 🧬 Merge user config with defaults
 
-vim.o.background = 'dark'
-vim.o.termguicolors = true
-vim.g.colors_name = 'just-black'
+  vim.cmd("hi clear")
+  if vim.fn.exists("syntax_on") then
+    vim.cmd("syntax reset")
+  end
+  if config.Variant == "dark" then
+    vim.o.background = "dark"
+  else
+    vim.notify("JMF >>>> Color Light")
+    vim.o.background = "light"
+  end
 
-local theme = require('just-black.theme')
+  vim.o.termguicolors = true
+  vim.g.colors_name = "just-black"
 
-if M.styles == "Transparent" then
-  theme.set_highlights(true)
-  vim.cmd [[
+  theme.setup(config.Variant)
+  theme.set_highlights(config.Transparent)
+  if config.Transparent == true then
+    vim.cmd([[
     highlight Normal guibg=none
     highlight NonText guibg=none
     highlight Normal ctermbg=none
     highlight NonText ctermbg=none
-  ]]
-else
-  theme.set_highlights(false)
+  ]])
+  end
 end
+
+return M

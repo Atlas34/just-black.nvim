@@ -1,9 +1,8 @@
+---@class Palette
 local colors = {
-  black1 = "#111111",
-  black2 = "#200a0e",
-  black3 = "#10130b",
-  black4 = "#1d1f28",
-  black5 = "#232638",
+  accent1 = "#111111",
+  accent2 = "#10130b",
+  accent3 = "#232638",
   darkBlue = "#07196e",
   blue = "#0077ff",
   blueLight = "#3bb6f7",
@@ -14,6 +13,7 @@ local colors = {
   greenBlue = "#23AB6C",
   greenLight = "#7EFF7E",
   greenPastel = "#00f7c6",
+  lightGreenBlue = "#27c4a4",
   darkGreenPastel = "#003027",
   grey1 = "#464B5D",
   grey2 = "#666666",

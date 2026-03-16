@@ -101,7 +101,7 @@ function M.set_highlights(transparent)
     MoreMsg = { fg = c.orange, bg = "NONE" },
     Question = { fg = c.orange, bg = "NONE" },
     EndOfBuffer = { fg = c.bg, bg = "NONE" },
-    NonText = { fg = c.bg, bg = "NONE" },
+    NonText = { fg = c.whiteSmoke, bg = "NONE" },
     TabLine = { fg = c.grey3, bg = c.bg },
     TabLineSel = { fg = c.fg, bg = c.white },
     TabLineFill = { fg = c.grey3, bg = c.bg },

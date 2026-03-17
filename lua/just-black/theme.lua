@@ -573,7 +573,7 @@ function M.set_highlights(transparent)
     BookMarksAnnNr = { fg = c.greenPastel, bg = "NONE" },
     BookMarksAnnLn = { fg = "NONE", bg = c.darkGreenPastel },
 
-    -- smacks
+    -- Smacks
     SnacksNotifierDebug = { fg = c.fg, bg = transparent and c.none or c.bg },
     SnacksNotifierBorderDebug = { fg = util.blend_bg(c.grey1, 0.4), bg = transparent and c.none or c.bg },
     SnacksNotifierIconDebug = { fg = c.grey1 },
@@ -624,6 +624,15 @@ function M.set_highlights(transparent)
     SnacksPickerPickWinCurrent = { fg = c.fg, bg = c.pink, bold = true },
     SnacksPickerPickWin = { fg = c.fg, bg = c.grey4, bold = true },
     SnacksPickerDir = { fg = c.grey1 },
+
+    -- Noice
+    NoiceCmdlineIconInput = { fg = c.yellow },
+    NoiceCmdlineIconLua = { fg = c.blue },
+    NoiceCmdlinePopupBorderInput = { fg = c.yellow },
+    NoiceCmdlinePopupBorderLua = { fg = c.blue },
+    NoiceCmdlinePopupTitleInput = { fg = c.yellow },
+    NoiceCmdlinePopupTitleLua = { fg = c.blue },
+    NoiceCompletionItemKindDefault = { fg = c.fg, bg = "NONE" },
   }
   Set_Highlights(Theme)
 end

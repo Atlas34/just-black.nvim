@@ -633,6 +633,10 @@ function M.set_highlights(transparent)
     NoiceCmdlinePopupTitleInput = { fg = c.yellow },
     NoiceCmdlinePopupTitleLua = { fg = c.blue },
     NoiceCompletionItemKindDefault = { fg = c.fg, bg = "NONE" },
+
+    -- Flash
+    FlashBackdrop = { fg = c.grey3 },
+    FlashLabel = { bg = c.fuchsia, bold = true, fg = c.white },
   }
   Set_Highlights(Theme)
 end
